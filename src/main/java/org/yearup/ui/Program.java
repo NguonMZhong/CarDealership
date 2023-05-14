@@ -1,4 +1,4 @@
-package org.yearup;
+package org.yearup.ui;
 
 public class Program
 {
