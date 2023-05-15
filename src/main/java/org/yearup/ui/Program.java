@@ -4,6 +4,15 @@ public class Program
 {
     public static void main(String[] args)
     {
-        System.out.println("Hello world!");
+        UserInterface ui = new UserInterface();
+        ui.display();
+
+
+        //Find vehicles within a price range
+        //Find vehicles by make/ model
+        //List ALL vehicles
+        //Add a vehicle
+        //Quit
+
     }
 }

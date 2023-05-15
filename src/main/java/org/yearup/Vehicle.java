@@ -6,17 +6,17 @@ public class Vehicle
     //variables
     private int vin;
     private int year;
-    private String make;
+    private String makeAndModel;
     private String vehicleType; //car, truck, etc..
     private String color;
     private int odometer;
     private double price;
 
-    public Vehicle (int vin, int year, String make, String vehicleType, String color, int odometer, double price)
+    public Vehicle (int vin, int year, String makeAndModel,String vehicleType, String color, int odometer, double price)
     {
         this.vin = vin;
         this.year = year;
-        this.make = make;
+        this.makeAndModel = makeAndModel;
         this.vehicleType = vehicleType;
         this.color = color;
         this.odometer = odometer;
@@ -43,14 +43,14 @@ public class Vehicle
         this.year = year;
     }
 
-    public String getMake()
+    public String getMakeAndModel()
     {
-        return make;
+        return makeAndModel;
     }
 
-    public void setMake(String make)
+    public void setMakeAndModel(String make)
     {
-        this.make = make;
+        this.makeAndModel = makeAndModel;
     }
 
     public String getVehicleType()
@@ -92,4 +92,10 @@ public class Vehicle
     {
         this.price = price;
     }
+    @Override
+    public String toString() {
+        return String.format("%d|%d|%s|%s|%s|%d|%.2f",vin,year,makeAndModel,vehicleType,color,odometer,price);
+
+    }
+
 }

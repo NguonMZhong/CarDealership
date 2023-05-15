@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static java.lang.Integer.parseInt;
+
 public class DealershipFileManager
 {
     private String filePath;
@@ -16,9 +18,9 @@ public class DealershipFileManager
     public Dealership getDealership()
     {
 
-        String dealerName = "";
-        String address = "";
-        String phone = "";
+        String dealerName = null;
+        String address = null;
+        String phone = null;
 
         ArrayList<Vehicle> inventory = new ArrayList<>();
 
@@ -35,17 +37,18 @@ public class DealershipFileManager
 
             while (scanner.hasNext())
             {
+
                 String line = scanner.nextLine();
                 String[] columns = line.split("\\|");
-                int vin = Integer.parseInt(columns[0]);
-                int year = Integer.parseInt(columns[1]);
-                String make = columns[2];
-                String vehicleType = columns[3];
-                String color = columns[4];
-                int odometer = Integer.parseInt(columns[5]);
-                double price = Double.parseDouble(columns[6]);
+                int vin = parseInt(columns[0]);
+                int year = parseInt(columns[1]);
+                String makeAndModel = columns[2] + " " + columns[3];
+                String vehicleType = columns[4];
+                String color = columns[5];
+                int odometer = parseInt(columns[6]);
+                double price = Double.parseDouble(columns[7]);
 
-                var vehicle = new Vehicle(vin, year, make, vehicleType, color, odometer, price);
+                var vehicle = new Vehicle(vin, year, makeAndModel, vehicleType, color, odometer, price);
 
                 inventory.add(vehicle);
 
@@ -53,8 +56,10 @@ public class DealershipFileManager
 
         } catch (IOException e)
         {
+
         }
         var dealership = new Dealership(dealerName,address,phone);
+        dealership.setInventory(inventory);
 
         return dealership;
 

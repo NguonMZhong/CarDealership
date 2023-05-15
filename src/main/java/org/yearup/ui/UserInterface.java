@@ -11,9 +11,12 @@ import java.util.Scanner;
 
 public class UserInterface
 {
-    DealershipFileManager fileManager = new DealershipFileManager("data\\inventory.csv");
 
+
+    private DealershipFileManager fileManager = new DealershipFileManager("data\\inventory.csv");
     private Dealership dealership;
+
+    Scanner scanner = new Scanner(System.in);
 
 
     public UserInterface()
@@ -23,49 +26,49 @@ public class UserInterface
     }
     private void init()
     {
-        DealershipFileManager dealershipFileManager = new DealershipFileManager();
-        this.dealership = dealershipFileManager.getDealership();
+        this.dealership = fileManager.getDealership();
     }
     public void display()
     {
-        Scanner scanner = new Scanner(System.in);
+
         boolean exit = false;
+
+        helperMenu();
 
         while (!exit)
         {
-            display();
-            String command = scanner.nextLine();
+            int option = scanner.nextInt();
 
-            switch (command.toLowerCase())
+            switch (option)
             {
-                case "price":
+                case 1:
                     processGetByPriceRequest();
                     break;
-                case "make model":
+                case 2:
                     processGetByMakeModelRequest();
                     break;
-                case "year":
+                case 3:
                     processGetByYearRequest();
                     break;
-                case "color":
+                case 4:
                     processGetByColorRequest();
                     break;
-                case "mileage":
+                case 5:
                     processGetByMileageRequest();
                     break;
-                case "type":
+                case 6:
                     processGetByVehicleTypeRequest();
                     break;
-                case "all":
+                case 7:
                     processGetAllVehiclesRequest();
                     break;
-                case "add":
+                case 8:
                     processAddVehicleRequest();
                     break;
-                case "remove":
+                case 9:
                     processRemoveVehicleRequest();
                     break;
-                case "exit":
+                case 0:
                     exit = true;
                     break;
                 default:
@@ -79,20 +82,22 @@ public class UserInterface
     {
         System.out.println("Please selection an option");
         System.out.println("-------------------------------");
-        System.out.println("Search by price");
-        System.out.println("Search by make model");
-        System.out.println("Search by year");
-        System.out.println("Search by color");
-        System.out.println("Search by mileage");
-        System.out.println("Search by type");
-        System.out.println("View all vehicles");
-        System.out.println("Add a new vehicles");
-        System.out.println("Remove a vehicle");
-        System.out.println("Exit");
+        System.out.println("1) Search by price");
+        System.out.println("2) Search by make model");
+        System.out.println("3) Search by year");
+        System.out.println("4) Search by color");
+        System.out.println("5) Search by mileage");
+        System.out.println("6) Search by type");
+        System.out.println("7) View all vehicles");
+        System.out.println("8) Add a new vehicles");
+        System.out.println("9) Remove a vehicle");
+        System.out.println("0) Exit");
+        System.out.print("Enter: ");
+
     }
-    private void displayVehicles(List<Vehicle> vehicles)
+    private void displayVehicles(ArrayList<Vehicle> vehicles)
     {
-        if (vehicles.isEmpty))
+        if (vehicles.isEmpty())
         {
             System.out.println("No vehicle found.");
         }
@@ -107,11 +112,34 @@ public class UserInterface
     }
     private void processAllVehiclesRequest()
     {
-        List<Vehicle> vehicles = dealership.getAllVehicles();
+        ArrayList<Vehicle> vehicles = dealership.getAllVehicles();
         displayVehicles(vehicles);
     }
     private void processGetByPriceRequest()
     {
+        System.out.println();
+        System.out.println("Enter the minimum price range: ");
+        double minimum = scanner.nextDouble();
+
+
+        System.out.println("Enter the maximum price range: ");
+        double maximum = scanner.nextDouble();
+
+        ArrayList<Vehicle> vehicles = dealership.getAllVehicles();
+        ArrayList<Vehicle> vehiclesInRange = new ArrayList<>();
+
+        for (Vehicle vehicle : vehicles)
+        {
+            if (vehicle.getPrice() >= minimum && vehicle.getPrice() <= maximum)
+            {
+                vehiclesInRange.add(vehicle);
+            }
+        }
+        System.out.println();
+        System.out.println("Here are vehicles that are within your price range.\n");
+        displayVehicles(vehiclesInRange);
+
+
 
     }
     private void processGetByMakeModelRequest()

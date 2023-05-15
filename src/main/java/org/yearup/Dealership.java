@@ -1,5 +1,6 @@
 package org.yearup;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Dealership
@@ -16,7 +17,7 @@ public class Dealership
         this.name = name;
         this.address = address;
         this.phone = phone;
-        this.inventory = inventory;
+        this.inventory = new ArrayList<>();
     }
     //getter & setters
     public String getName()
@@ -53,7 +54,15 @@ public class Dealership
 
     public ArrayList<Vehicle> getVehiclesByPrice(double min, double max)
     {
-        return null;
+        ArrayList result = new ArrayList();
+        for (Vehicle vehicle : inventory)
+        {
+            if (vehicle.getPrice() >= min && vehicle.getPrice() <= max)
+            {
+                result.add(vehicle);
+            }
+        }
+        return result;
     }
     public ArrayList<Vehicle> getVehiclesByMakeModel(String make, String model)
     {
@@ -91,5 +100,11 @@ public class Dealership
         //don't add code
 
     }
+    public void setInventory(ArrayList<Vehicle> inventory) {
+        this.inventory = inventory;
+    }
+
+
+
 
 }
