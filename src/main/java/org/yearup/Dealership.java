@@ -54,7 +54,7 @@ public class Dealership
 
     public ArrayList<Vehicle> getVehiclesByPrice(double min, double max)
     {
-        ArrayList result = new ArrayList();
+        ArrayList<Vehicle> result = new ArrayList();
         for (Vehicle vehicle : inventory)
         {
             if (vehicle.getPrice() >= min && vehicle.getPrice() <= max)
@@ -66,19 +66,58 @@ public class Dealership
     }
     public ArrayList<Vehicle> getVehiclesByMakeModel(String make, String model)
     {
-        return null;
+        ArrayList<Vehicle> result = new ArrayList<>();
+        for (Vehicle vehicle : inventory)
+        {
+            if(make.isEmpty() || vehicle.getMakeAndModel().toLowerCase().contains(make.toLowerCase()))
+            {
+                result.add(vehicle);
+            }
+        }
+        return  result;
     }
     public ArrayList<Vehicle> getVehiclesByYear(double min, double max)
     {
-        return null;
+        ArrayList<Vehicle> searchResults = new ArrayList<>();
+
+        for(Vehicle vehicle: inventory)
+        {
+            if(vehicle.getYear() >= min && vehicle.getYear() <= max)
+            {
+                searchResults.add(vehicle);
+            }
+        }
+
+        return searchResults;
     }
     public ArrayList<Vehicle> getVehiclesByColor(String color)
     {
-        return null;
+        ArrayList<Vehicle> results = new ArrayList<>();
+
+        for (Vehicle vehicle : inventory)
+        {
+            if(vehicle.getColor().equalsIgnoreCase(color))
+            {
+                results.add(vehicle);
+            }
+
+        }
+
+        return results;
     }
     public ArrayList<Vehicle> getVehiclesByMileage(double min, double max)
     {
-        return null;
+        ArrayList<Vehicle> results = new ArrayList<>();
+
+        for(Vehicle vehicle: inventory)
+        {
+            if(vehicle.getOdometer() >= min && vehicle.getOdometer() <= max)
+            {
+                results.add(vehicle);
+            }
+        }
+
+        return results;
     }
     public ArrayList<Vehicle> getVehiclesByType(String vehicleType)
     {
